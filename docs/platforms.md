@@ -27,6 +27,8 @@ runner and a release owner exist.
 - Tests must not assume a Unix shell, `/tmp`, case-sensitive paths, or POSIX-only
   filesystem replacement behavior.
 - Platform-specific credential stores are accessed through the `keyring` crate.
+- Linux source builds require Kerberos/GSSAPI development headers for SPNEGO
+  authentication (`libkrb5-dev` on Debian and Ubuntu).
 - Features that depend on a transport capability must check the bundled libcurl
   build and appear in `verbsmith doctor`.
 - A platform regression blocks a release for its support tier and must not be

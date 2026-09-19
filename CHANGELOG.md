@@ -10,3 +10,4 @@ after 1.0 and uses the Keep a Changelog structure.
 - Initial Cargo workspace, request format, parser, formatter, execution engine, CLI, TUI, reports, sync-server skeleton, documentation, and community policies.
 - Hardened sync extraction against path collisions and symbolic-link traversal.
 - Added checksums, build provenance attestations, and ARM64 Linux and Windows release jobs.
+- Added the Linux GSSAPI build dependency to CI and container builds.
