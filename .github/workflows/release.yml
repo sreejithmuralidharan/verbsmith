@@ -55,7 +55,7 @@ jobs:
           New-Item -ItemType Directory dist
           Copy-Item target/release/verbsmith.exe,target/release/verbsmith-server.exe,LICENSE,LICENSE-MIT,LICENSE-APACHE,NOTICE,THIRD_PARTY.md dist/
           Compress-Archive dist/* "${{ matrix.artifact }}.zip"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.artifact }}
           path: |
