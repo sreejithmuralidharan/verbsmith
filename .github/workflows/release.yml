@@ -74,7 +74,7 @@ jobs:
         working-directory: artifacts
         run: sha256sum *.tar.gz *.zip > SHA256SUMS
       - name: Attest release artifacts
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: |
             artifacts/*.tar.gz
