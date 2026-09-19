@@ -1,0 +1,24 @@
+name: Feature request
+description: Propose a user problem for Verbsmith to solve
+title: "feature: "
+labels: [enhancement, needs-triage]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Explain the workflow that is difficult today, rather than only naming a feature.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and examples
+      description: Link public discussions, standards, or reproducible examples where available.
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Successful outcome
+    validations:
+      required: true
+

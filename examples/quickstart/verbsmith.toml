@@ -1,0 +1,7 @@
+schema = 1
+name = "quickstart"
+default_environment = "local"
+
+[variables]
+client = "verbsmith"
+

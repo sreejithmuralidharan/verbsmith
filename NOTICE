@@ -1,0 +1,9 @@
+Verbsmith
+Copyright 2026 Sreejith Muralidharan and Verbsmith contributors
+
+Verbsmith's HTTP engine uses libcurl. libcurl is copyright Daniel Stenberg and
+contributors and is distributed under the curl license. See THIRD_PARTY.md.
+
+Verbsmith is an independent project and is not affiliated with or endorsed by
+the curl project, Postman, Insomnia, Bruno, or their respective owners.
+

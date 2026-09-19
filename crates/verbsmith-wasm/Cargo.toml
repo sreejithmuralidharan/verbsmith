@@ -1,0 +1,21 @@
+[package]
+name = "verbsmith-wasm"
+description = "Browser bridge for the Verbsmith workspace format"
+keywords = ["http", "api", "wasm", "parser"]
+categories = ["parser-implementations", "wasm"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "README.md"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde_json.workspace = true
+verbsmith-core = { version = "0.1.0-alpha.1", path = "../verbsmith-core" }
+wasm-bindgen.workspace = true

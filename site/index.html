@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Verbsmith is a local-first, open-source API workspace for the terminal." />
+    <title>Verbsmith — APIs, forged in the terminal</title>
+    <style>
+      :root { color-scheme: dark; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background:#09110f; color:#e8fff5; }
+      body { margin:0; min-height:100vh; display:grid; place-items:center; background:radial-gradient(circle at 80% 20%,#173d32,#09110f 48%); }
+      main { width:min(880px,calc(100% - 3rem)); padding:5rem 0; }
+      .eyebrow { color:#61e6ae; text-transform:uppercase; letter-spacing:.14em; }
+      h1 { font-size:clamp(3rem,10vw,7rem); margin:.15em 0; letter-spacing:-.07em; }
+      p { max-width:660px; color:#b7cfc5; font:1.15rem/1.7 system-ui,sans-serif; }
+      pre { margin:2.5rem 0; padding:1.25rem; border:1px solid #315d4e; border-radius:12px; background:#050a09; overflow:auto; }
+      a { color:#61e6ae; }
+      nav { display:flex; gap:1.25rem; flex-wrap:wrap; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">Local-first · Open source · Cross-platform</div>
+      <h1>Verbsmith</h1>
+      <p>A Git-native API workspace with a fast CLI, an interactive terminal UI, executable tests, and no mandatory account.</p>
+      <pre><code>verbsmith request GET https://api.example.com/health
+verbsmith test all --env staging</code></pre>
+      <nav>
+        <a href="https://github.com/sreejithmuralidharan/verbsmith">GitHub</a>
+        <a href="../docs/guide/workspaces.md">Workspace format</a>
+        <a href="https://sreejith.co.uk">More developer tools by Sreejith</a>
+      </nav>
+    </main>
+  </body>
+</html>
+

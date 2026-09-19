@@ -1,0 +1,19 @@
+services:
+  sync:
+    build: .
+    environment:
+      VERBSMITH_SERVER_ADDR: 0.0.0.0:8787
+      VERBSMITH_SERVER_DATABASE: /data/verbsmith.sqlite3
+      VERBSMITH_SERVER_TOKEN: ${VERBSMITH_SERVER_TOKEN:?set a random token of at least 24 characters}
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - verbsmith-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    restart: unless-stopped
+
+volumes:
+  verbsmith-data:
+

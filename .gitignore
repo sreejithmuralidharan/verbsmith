@@ -1,0 +1,10 @@
+/target/
+/.verbsmith/
+/.playwright-cli/
+*.swp
+*.tmp
+.DS_Store
+.env
+.env.*
+!/.env.example
+

@@ -1,0 +1,85 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  attestations: write
+  contents: write
+  id-token: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact: verbsmith-linux-x86_64
+          - os: ubuntu-24.04-arm
+            artifact: verbsmith-linux-aarch64
+          - os: macos-13
+            artifact: verbsmith-macos-x86_64
+          - os: macos-14
+            artifact: verbsmith-macos-aarch64
+          - os: windows-latest
+            artifact: verbsmith-windows-x86_64
+          - os: windows-11-arm
+            artifact: verbsmith-windows-aarch64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.98.1
+      - run: cargo test --workspace --locked
+      - run: cargo build --release --locked -p verbsmith -p verbsmith-server
+      - name: Strip Linux binaries
+        if: runner.os == 'Linux'
+        run: strip target/release/verbsmith target/release/verbsmith-server
+      - name: Strip macOS binaries
+        if: runner.os == 'macOS'
+        run: strip -x target/release/verbsmith target/release/verbsmith-server
+      - name: Stage Unix artifacts
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          mkdir dist
+          cp target/release/verbsmith target/release/verbsmith-server LICENSE LICENSE-MIT LICENSE-APACHE NOTICE THIRD_PARTY.md dist/
+          tar -czf "${{ matrix.artifact }}.tar.gz" -C dist .
+      - name: Stage Windows artifacts
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory dist
+          Copy-Item target/release/verbsmith.exe,target/release/verbsmith-server.exe,LICENSE,LICENSE-MIT,LICENSE-APACHE,NOTICE,THIRD_PARTY.md dist/
+          Compress-Archive dist/* "${{ matrix.artifact }}.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: |
+            *.tar.gz
+            *.zip
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: Create checksums
+        working-directory: artifacts
+        run: sha256sum *.tar.gz *.zip > SHA256SUMS
+      - name: Attest release artifacts
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            artifacts/*.tar.gz
+            artifacts/*.zip
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: artifacts/*
